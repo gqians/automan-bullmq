@@ -1,0 +1,18 @@
+version: '3.5'
+services:
+  redis:
+    deploy:
+      restart_policy:
+        condition: on-failure
+    image: redis
+    container_name: nest-redis
+    command: redis-server --requirepass "123456"
+    ports:
+      - "16379:6379"
+    volumes:
+      - ./docker/redisData:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
